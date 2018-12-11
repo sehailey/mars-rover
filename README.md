@@ -1,14 +1,3 @@
-Nearly empty javascript project with a failing test!
-===
+# Mars Rover
 
-To install the required modules:
-
-```
-$ yarn install
-```
-
-To run the (failing) test:
-
-```
-$ yarn test
-```
+Mars Rover Coding Challenge
