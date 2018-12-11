@@ -6,6 +6,7 @@ class Plateau {
       parseInt(coordString[0]),
       parseInt(coordString[2])
     )
+    this.obstacles = {}
   }
   isInBounds(coordinates) {
     return (
@@ -14,6 +15,14 @@ class Plateau {
       coordinates.y >= 0 &&
       coordinates.y <= this.boundary.y
     )
+  }
+
+  addObstacle(coordinates) {
+    this.obstacles[coordinates.x] = coordinates.y
+  }
+
+  isObstacle(coordinates) {
+    return this.obstacles[coordinates.x] === coordinates.y
   }
 }
 

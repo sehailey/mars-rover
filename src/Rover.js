@@ -24,7 +24,10 @@ class Rover {
 
   move(plateau) {
     const newCoordinates = this.getNewCoordinates()
-    if (plateau.isInBounds(newCoordinates))
+    if (
+      plateau.isInBounds(newCoordinates) &&
+      !plateau.isObstacle(newCoordinates)
+    )
       this.coordinates = new Coordinates(newCoordinates.x, newCoordinates.y)
   }
 
@@ -45,6 +48,7 @@ class Rover {
       else if (move === 'R') this.turnRight()
       else if (move === 'M') this.move(plateau)
     })
+    plateau.addObstacle(this.coordinates)
     return this
   }
 }

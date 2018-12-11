@@ -50,6 +50,22 @@ describe('Rover', () => {
     expect(rover.coordinates.y).to.equal(1)
   })
 
+  it('does not move to a square with an obstacle', () => {
+    const rover = new Rover('0 0 N', 'MMRMM')
+    const plateau = new Plateau('5 5')
+    plateau.addObstacle({ x: 0, y: 2 })
+    rover.move(plateau)
+    rover.move(plateau)
+    expect(rover.coordinates.x).to.equal(0)
+    expect(rover.coordinates.y).to.equal(1)
+    rover.turnRight()
+    rover.move(plateau)
+    rover.turnLeft()
+    rover.move(plateau)
+    expect(rover.coordinates.x).to.equal(1)
+    expect(rover.coordinates.y).to.equal(2)
+  })
+
   it('has a method \'turnLeft\' that updates the rover\'s orientation based on the move', () => {
     const rover = new Rover(location, moves)
     rover.turnLeft()
@@ -64,5 +80,12 @@ describe('Rover', () => {
     expect(rover.orientation).to.equal('E')
     rover.turnRight()
     expect(rover.orientation).to.equal('S')
+  })
+
+  it('adds its final location to the plateau as an obstacle', () => {
+    const rover = new Rover(location, moves)
+    const plateau = new Plateau('5 5')
+    rover.executeCommands(plateau)
+    expect(plateau.isObstacle(rover.coordinates)).to.equal(true)
   })
 })
